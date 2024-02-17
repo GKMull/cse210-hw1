@@ -1,9 +1,54 @@
 using System;
+using System.Collections.Generic;
 
-class Program
+class ScriptureMemorizer
 {
-    static void Main(string[] args)
+    private Dictionary<string, string> _scriptures = new Dictionary<string, string>();
+
+    public void AddScripture(string reference, string text)
     {
-        
+        _scriptures[reference] = text;
+    }
+
+    public void MemorizeScripture(string reference)
+    {
+        if (_scriptures.TryGetValue(reference, out var scriptureText))
+        {
+            Console.Clear();
+            Console.WriteLine($"Scripture: {reference}");
+            Console.WriteLine(scriptureText);
+
+            Console.WriteLine("\nPress Enter to reveal more words or type 'quit' to exit.");
+            while (true)
+            {
+                var input = Console.ReadLine().Trim().ToLower();
+                if (input == "quit")
+                    break;
+
+                // Hide a few random words (you can customize this logic)
+                var hiddenText = HideRandomWords(scriptureText);
+                Console.Clear();
+                Console.WriteLine($"Scripture: {reference}");
+                Console.WriteLine(hiddenText);
+            }
+        }
+        else
+        {
+            Console.WriteLine($"Scripture '{reference}' not found.");
+        }
+    }
+
+    private string HideRandomWords(string text)
+    {
+        // Replace this with your logic to hide words (e.g., remove every nth word)
+        // For simplicity, let's hide every second word.
+        var words = text.Split(' ');
+        for (int i = 1; i < words.Length; i += 2)
+        {
+            words[i] = new string('_', words[i].Length);
+        }
+        return string.Join(" ", words);
     }
 }
+
+
