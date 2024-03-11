@@ -1,18 +1,17 @@
 using System;
-using System.Collections.Generic;
 
-class ScriptureMemorizer
+class Develop03
 {
-    private Dictionary<string, string> _scriptures = new Dictionary<string, string>();
+    private Dictionary<string, string> scripture = new Dictionary<string, string>();
 
     public void AddScripture(string reference, string text)
     {
-        _scriptures[reference] = text;
+        scripture[reference] = text;
     }
 
     public void MemorizeScripture(string reference)
     {
-        if (_scriptures.TryGetValue(reference, out var scriptureText))
+        if (scriptures.TryGetValue(reference, out var scriptureText))
         {
             Console.Clear();
             Console.WriteLine($"Scripture: {reference}");
@@ -43,12 +42,11 @@ class ScriptureMemorizer
         // Replace this with your logic to hide words (e.g., remove every nth word)
         // For simplicity, let's hide every second word.
         var words = text.Split(' ');
-        for (int i = 1; i < words.Length; i += 2)
+        for (int i = 1; i < words.Length; i += )
         {
-            words[i] = new string('_', words[i].Length);
+            words[i] = new string('*', words[i].Length);
         }
         return string.Join(" ", words);
     }
 }
-
 
